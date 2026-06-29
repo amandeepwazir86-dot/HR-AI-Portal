@@ -325,6 +325,7 @@ function App() {
                       onChange={handleChange}
                     >
                       <option value="Phone">Phone</option>
+                      <option value="HR Interview">HR Interview</option>
                       <option value="Teams">Teams</option>
                       <option value="Face to Face">Face to Face</option>
                     </select>

@@ -85,6 +85,17 @@ const interviewDetails = ({
     };
   }
 
+  if (interviewMode === 'HR Interview') {
+    return {
+      scheduleText,
+      emailLine:
+        `Your HR interview is scheduled${scheduleText ? ` for ${scheduleText}` : ''}.\n\n` +
+        `The HR team will discuss your profile, role expectations, compensation details, availability, and next steps.`,
+      shortLine:
+        `HR interview${scheduleText ? ` on ${scheduleText}` : ''}`
+    };
+  }
+
   return {
     scheduleText,
     emailLine:
