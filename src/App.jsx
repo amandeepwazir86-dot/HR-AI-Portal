@@ -3,11 +3,14 @@ import { useState } from 'react';
 const stages = [
   'Resume Shortlisted',
   'Interview Scheduled',
+  'HR Interview',
   'Next Round Selected',
   'Offer Under Approval',
   'Documents Required',
   'Rejected'
 ];
+
+const interviewStages = ['Interview Scheduled', 'HR Interview'];
 
 const defaultCompanyProfile =
   'Translab Technologies is a global technology consulting and digital transformation company specializing in Cloud, Data & AI, Digital Engineering, Application Modernization, and Managed Services. The company partners with enterprises across Banking, Financial Services, Healthcare, Manufacturing, Telecom, and the Public Sector to deliver innovative, scalable, and business-driven technology solutions. In addition to its consulting services, Translab has developed Tantor, its proprietary AI-powered data and analytics platform that enables organizations to streamline data management, improve governance, and derive actionable business insights through intelligent automation.';
@@ -180,7 +183,7 @@ function App() {
     ? `sms:${normalizedPhone}?body=${encodeURIComponent(generatedContent.smsMessage)}`
     : '';
   const calendarLink = generatedContent ? createCalendarLink(formData, generatedContent) : '';
-  const showInterviewFields = formData.currentStage === 'Interview Scheduled';
+  const showInterviewFields = interviewStages.includes(formData.currentStage);
 
   if (!auth) {
     return (
@@ -475,7 +478,7 @@ function App() {
                   <a className="action-button sms-action" href={smsLink}>
                     Open SMS
                   </a>
-                  {formData.currentStage === 'Interview Scheduled' && (
+                  {showInterviewFields && (
                     <a
                       className="action-button calendar-action"
                       href={calendarLink}
@@ -484,8 +487,7 @@ function App() {
                       Download Calendar
                     </a>
                   )}
-                  {formData.currentStage === 'Interview Scheduled' &&
-                    formData.interviewMode === 'Teams' && (
+                  {showInterviewFields && formData.interviewMode === 'Teams' && (
                       <a
                         className="action-button teams-action"
                         href={formData.teamsMeetingLink}

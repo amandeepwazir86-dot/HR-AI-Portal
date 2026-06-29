@@ -17,6 +17,7 @@ let saveQueue = Promise.resolve();
 const sessions = new Map();
 const authUser = process.env.HR_PORTAL_USER || 'coordinator';
 const authPassword = process.env.HR_PORTAL_PASSWORD || 'ChangeMe@123';
+const interviewStages = ['Interview Scheduled', 'HR Interview'];
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
@@ -233,7 +234,7 @@ app.post('/api/recruitment/generate', requireAuth, async (req, res) => {
   if (!jobDescription?.trim()) missingFields.push('Job Description');
   if (!companyProfile?.trim()) missingFields.push('Company Profile');
 
-  if (currentStage === 'Interview Scheduled') {
+  if (interviewStages.includes(currentStage)) {
     if (!interviewMode?.trim()) missingFields.push('Interview Mode');
     if (!interviewDate?.trim()) missingFields.push('Interview Date');
     if (!interviewStartTime?.trim()) missingFields.push('Interview Start Time');
@@ -254,7 +255,7 @@ app.post('/api/recruitment/generate', requireAuth, async (req, res) => {
   }
 
   if (
-    currentStage === 'Interview Scheduled' &&
+    interviewStages.includes(currentStage) &&
     interviewStartTime &&
     interviewEndTime &&
     interviewEndTime <= interviewStartTime

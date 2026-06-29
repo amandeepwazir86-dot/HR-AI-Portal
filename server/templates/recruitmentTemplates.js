@@ -1,6 +1,7 @@
 export const recruitmentStages = [
   'Resume Shortlisted',
   'Interview Scheduled',
+  'HR Interview',
   'Next Round Selected',
   'Offer Under Approval',
   'Documents Required',
@@ -270,6 +271,17 @@ const templates = {
 };
 
 export const generateRecruitmentMessages = (formData) => {
+  if (formData.currentStage === 'HR Interview') {
+    const template = templates['Interview Scheduled'];
+    return {
+      ...template({
+        ...formData,
+        interviewMode: formData.interviewMode || 'HR Interview'
+      }),
+      emailSubject: `HR Interview Scheduled for ${formData.position}`
+    };
+  }
+
   const template = templates[formData.currentStage];
   return template(formData);
 };

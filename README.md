@@ -39,7 +39,7 @@ Note: browser `mailto:` links cannot attach files automatically. If a JD file is
 
 ## Interview Scheduling
 
-When `Current Stage` is `Interview Scheduled`, the form captures:
+When `Current Stage` is `Interview Scheduled` or `HR Interview`, the form captures:
 
 - Interview mode: Phone, HR Interview, Teams, or Face to Face
 - Interview date
